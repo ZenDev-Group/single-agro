@@ -928,7 +928,17 @@ html.lenis body {
 .downloads-section {
     padding: 80px 40px;
     background-color: white;
-    /* Fondo blanco para darle claridad y contraste */
+
+    /* SOLUCIÓN AL DESFASE: */
+    width: 100%;
+    overflow-x: hidden;
+    /* Corta cualquier elemento que esté fuera de sus límites */
+    position: relative;
+}
+
+
+.section-container {
+    overflow-x: hidden;
 }
 
 /* Contenedor de los botones */
