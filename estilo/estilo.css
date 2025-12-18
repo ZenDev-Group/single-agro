@@ -6,6 +6,32 @@
     padding: 0;
 }
 
+/* RESET DE ANCHO GLOBAL */
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    /* Primera capa de seguridad */
+    position: relative;
+}
+
+#page-wrapper {
+    width: 100%;
+    overflow: hidden;
+    /* Segunda capa: corta cualquier animación lateral */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* IMPORTANTE: Elimina cualquier transition de CSS en elementos que anime GSAP */
+.download-button,
+.animated-card,
+.solution-card {
+    transition: none !important;
+}
+
 body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
@@ -32,7 +58,10 @@ body {
 .solution-card,
 .authority-item,
 .download-button {
-    visibility: visible;
+    opacity: 1;
+    visibility: visible !important;
+    transform: none;
+    /* Limpiamos cualquier transformación previa */
 }
 
 /* Necesario para que Lenis tome el control total */
@@ -478,7 +507,7 @@ html.lenis body {
 /* SECCIÓN 2: PRESENTACION */
 /* ======================================================= */
 .section-container {
-    padding: 80px 40px;
+    padding: 80px 10px;
     background-color: white;
     text-align: center;
 }
@@ -486,6 +515,7 @@ html.lenis body {
 .content-wrapper {
     max-width: 900px;
     margin: 0 auto;
+    width: 80%;
 }
 
 /* Título Secundario */
@@ -925,8 +955,9 @@ html.lenis body {
 /* SECCION 7: DESCARGAS*/
 /* ======================================================= */
 
+
 .downloads-section {
-    padding: 80px 40px;
+    padding: 80px 0px;
     background-color: white;
 
     /* SOLUCIÓN AL DESFASE: */
@@ -936,7 +967,7 @@ html.lenis body {
     position: relative;
 }
 
-
+/* Opcional: Aplicar a todas las secciones que tengan animaciones laterales */
 .section-container {
     overflow-x: hidden;
 }
