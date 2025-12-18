@@ -125,4 +125,44 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('load', () => {
         ScrollTrigger.refresh();
     });
+
+    // --- SECCIÓN 8: CONTACTO PROFESIONAL ---
+
+    // 1. EL FONDO: Parallax de Zoom Inverso
+    gsap.to(".cta-parallax-bg", {
+        yPercent: 30, // Se mueve en contra del scroll
+        ease: "none",
+        scrollTrigger: {
+            trigger: ".final-cta-section",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true // Sincronizado al movimiento del mouse/dedo
+        }
+    });
+
+    // 2. EL CONTENIDO: Revelado secuencial
+    const tlCta = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".final-cta-content",
+            start: "top 85%",
+            toggleActions: "play none none none"
+        }
+    });
+
+    tlCta.from(".final-cta-content > *", {
+        y: 40,
+        autoAlpha: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out"
+    });
+
+    // 3. CTA DINÁMICO: Latido de WhatsApp
+    gsap.to(".whatsapp-btn-simple", {
+        scale: 1.05,
+        duration: 1,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+    });
 });
