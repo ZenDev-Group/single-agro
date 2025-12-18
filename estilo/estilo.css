@@ -1,0 +1,1378 @@
+/* ======================================================= */
+/* RESET BÁSICO */
+/* ======================================================= */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    /* Usamos Montserrat como base */
+    color: #333;
+    line-height: 1.6;
+    background-color: #ffffff;
+    /* CLAVE: Empujar todo el contenido hacia abajo para dejar espacio al menú fijo */
+    padding-top: 70px;
+}
+
+/* RESET CRÍTICO PARA LENIS */
+html {
+    scroll-behavior: auto !important;
+}
+
+body {
+    overscroll-behavior-y: none;
+    /* Evita el efecto rebote en Mac/iOS que bugea el scroll */
+}
+
+/* Evitamos que las tarjetas parpadeen antes de que cargue GSAP */
+.animated-card,
+.solution-card,
+.authority-item,
+.download-button {
+    visibility: visible;
+}
+
+/* Necesario para que Lenis tome el control total */
+html.lenis,
+html.lenis body {
+    height: auto;
+}
+
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+    pointer-events: none;
+}
+
+/* Cambia esto en tu CSS */
+.animated-card {
+    opacity: 1;
+    /* <-- Debe ser 1 para que GSAP sepa que debe llegar ahí */
+    will-change: transform, opacity;
+}
+
+/* Y asegúrate que esto tampoco oculte nada */
+.solution-card {
+    opacity: 1;
+}
+
+/* ======================================================= */
+/* SECCIÓN 0: HEADER */
+/* ======================================================= */
+
+/* ======================================================= */
+/* SECCIÓN 0: HEADER (EFECTO GLASSMORPHISM) */
+/* ======================================================= */
+
+.main-header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 80px;
+    z-index: 2000;
+
+    /* EFECTO CRISTAL: Fondo blanco translúcido */
+    background-color: rgba(255, 255, 255, 0.75);
+
+    /* EFECTO BLUR: El desenfoque del contenido de atrás */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    /* Soporte para Safari */
+
+    /* Borde sutil para definir el límite del vidrio */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+
+    /* Sombra más suave y moderna */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+
+    transition: all 0.4s ease;
+    /* Para futuras interacciones */
+}
+
+/* CONTENEDOR FLUIDO: Logo a la izquierda y Botón a la derecha */
+.header-content-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    padding: 0 30px;
+    /* Pequeño margen para que no toque el vidrio físico del monitor */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* LOGO */
+.header-logo-link {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+}
+
+.header-logo {
+    max-width: 180px;
+    height: auto;
+}
+
+/* NAVEGACIÓN CENTRAL */
+.primary-nav {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.header-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 30px;
+}
+
+.header-links a {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 0.9em;
+    color: #333;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.header-links a:hover {
+    color: #E30613;
+}
+
+/* ============== BOTÓN LLAMAR AHORA ============== */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 0;
+}
+
+.header-cta-btn {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    background-color: #E30613;
+    color: white;
+    text-decoration: none;
+    padding: 12px 22px;
+    border-radius: 5px;
+    font-size: 0.85em;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.header-cta-btn:hover {
+    background-color: #a00411;
+    transform: translateY(-2px);
+}
+
+/* ============== BOTÓN HAMBURGUESA ============= */
+.menu-toggle {
+    display: none;
+    /* Oculto en PC */
+    background: none;
+    border: none;
+    font-size: 1.8em;
+    color: #333;
+    cursor: pointer;
+    padding: 5px;
+}
+
+/* ------------------------------------------------------- */
+/* MEDIA QUERY: MÓVILES */
+/* ------------------------------------------------------- */
+@media (max-width: 992px) {
+    .header-content-bar {
+        padding: 0 20px;
+    }
+
+    .header-cta-btn {
+        display: none;
+        /* Se oculta para dar espacio al logo y hamburguesa */
+    }
+
+    .menu-toggle {
+        display: block;
+        /* Aparece en móvil */
+    }
+
+    /* ESTILO CORTINA (EL DESPLEGABLE) */
+    .primary-nav {
+        position: absolute;
+        top: 80px;
+        /* Altura exacta del header */
+        left: 0;
+        width: 100%;
+        background-color: white;
+        flex-direction: column;
+        display: block !important;
+        /* Forzamos existencia para animación */
+
+        /* ESTADO CERRADO */
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease-in-out, opacity 0.3s ease;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        z-index: 1999;
+    }
+
+    /* ESTADO ABIERTO (Activado por JS) */
+    .primary-nav.active {
+        max-height: 600px;
+        /* Altura suficiente para los links */
+        opacity: 1;
+    }
+
+    .header-links {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .header-links li {
+        width: 100%;
+        border-bottom: 1px solid #f5f5f5;
+    }
+
+    .header-links a {
+        padding: 20px;
+        width: 100%;
+        display: block;
+        text-align: center;
+        font-weight: 500;
+        font-size: 1em;
+    }
+}
+
+/* ======================================================= */
+/* SECCION 1: HERO */
+/* ======================================================= */
+.hero-container {
+    height: 85vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* EFECTO PARALLAX */
+.hero-parallax {
+    background-image: url('../imagenes/banner-cestari.jpg');
+    /* <<-- IMAGEN DE ALTO IMPACTO */
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;
+    /* <<-- CLAVE DEL EFECTO PARALLAX */
+}
+
+/* Overlay */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.20);
+    z-index: 5;
+}
+
+/* Contenido Fijo */
+.hero-content {
+    position: relative;
+    z-index: 10;
+}
+
+/* --- SLOGAN PROFESIONAL --- */
+.hero-slogan {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    /* Un poco de aire entre letras para look premium */
+
+    /* TAMAÑO CORREGIDO */
+    font-size: clamp(1rem, 4vw, 1.5rem);
+
+    /* PREPARACIÓN PARA GSAP */
+    transform: translateY(100%);
+    opacity: 1 !important;
+}
+
+/* --- TÍTULO PROFESIONAL --- */
+.hero-title {
+    font-family: 'Fjalla One', sans-serif;
+    font-weight: 900;
+    color: white;
+    margin: 0;
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    /* Tamaño fluido según pantalla */
+
+    /* PREPARACIÓN PARA GSAP */
+    transform: translateY(100%);
+    opacity: 1 !important;
+}
+
+/* Eliminamos la animación antigua que ya no necesitamos */
+@keyframes slideUpFadeIn {
+    /* Puedes borrar este bloque de tu CSS si no lo usas en otro lado */
+}
+
+.hero-container {
+    perspective: 1000px;
+    /* Prepara el espacio para efectos 3D */
+}
+
+.hero-parallax-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    /* Más alto para tener margen de movimiento */
+    background: url('../imagenes/banner-cestari.jpg') center/cover no-repeat;
+    z-index: 1;
+}
+
+.title-wrapper,
+.slogan-wrapper {
+    overflow: hidden;
+    /* Esencial para el efecto de revelado */
+    display: block;
+}
+
+
+
+
+/* ============== ANIMACIÓN DE ENTRADA DE TEXTO ESCALONADA ==============*/
+@keyframes slideUpFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============== BOTÓN FLOTANTE DE WHATSAPP ============== */
+.float-wa {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    z-index: 100;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
+}
+
+
+/* ======================================================= */
+/* MEDIA QUERY: MÓVILES */
+/* ======================================================= */
+@media (max-width: 992px) {
+
+    .primary-nav,
+    .header-cta-btn {
+        display: none;
+        /* Oculta la navegación en escritorio */
+    }
+
+    .menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 1.5em;
+        color: #333;
+        cursor: pointer;
+        padding: 0;
+    }
+
+    .header-content-bar {
+        padding: 10px 20px;
+        justify-content: space-between;
+    }
+
+    /* Estilo del menú al estar activo (desplegable) */
+    .primary-nav.active {
+        display: block;
+        position: absolute;
+        top: 70px;
+        /* Justo debajo del header */
+        left: 0;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        z-index: 998;
+    }
+
+    .header-links {
+        flex-direction: column;
+        gap: 0;
+        padding: 10px 0;
+    }
+
+    .header-links li {
+        width: 100%;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .header-links a {
+        display: block;
+        padding: 15px 20px;
+        font-size: 1em;
+    }
+
+    .hero-title {
+        font-size: 2.2em;
+        /* Títulos más pequeños en móvil */
+    }
+}
+
+
+/* ======================================================= */
+/* SECCIÓN 2: PRESENTACION */
+/* ======================================================= */
+.section-container {
+    padding: 80px 40px;
+    background-color: white;
+    text-align: center;
+}
+
+.content-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Título Secundario */
+.section-title {
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Párrafo Introductorio */
+.section-lead {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 40px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Párrafo Principal  */
+.main-story {
+    font-size: 1.05em;
+    line-height: 1.8;
+    color: #333;
+    max-width: 750px;
+    margin: 0 auto 30px auto;
+}
+
+/* Bloque de Ubicación Destacada */
+.location-highlight {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 40px;
+    font-weight: 300;
+}
+
+.location-data {
+    display: block;
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 1.5em;
+    color: #E30613;
+    /* Texto Rojo de Acento */
+    margin-top: 5px;
+    font-weight: 400;
+}
+
+/* Mejora el espaciado para que la animación tenga "aire" */
+.presentation-card {
+    overflow: hidden;
+    /* Evita que los elementos que vienen de afuera generen scroll horizontal */
+}
+
+.location-data {
+    display: inline-block;
+    /* Permite que la animación de escala funcione mejor */
+}
+
+/* ======================================================= */
+/* SECCION 3: MAPA DE UBICACIÓN */
+/* ======================================================= */
+
+.map-section {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: #f4f4f4;
+    /* Un gris claro para diferenciarla del blanco de la sección anterior */
+}
+
+.map-disclaimer {
+    margin-top: -10px;
+    margin-bottom: 30px;
+}
+
+.map-container {
+    /* Establece la altura del contenedor del mapa. 
+       Esto es importante para que el mapa incrustado tenga un tamaño visible. */
+    height: 450px;
+    width: 100%;
+    border: 5px solid #E30613;
+    /* Borde rojo corporativo alrededor del mapa */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* ------------------------------------------------------- */
+/* MEDIA QUERY: MÓVILES */
+/* ------------------------------------------------------- */
+
+@media (max-width: 768px) {
+    .map-container {
+        height: 300px;
+    }
+}
+
+/* ======================================================= */
+/* SECCIÓN 4: PILARES DEL SERVICIO */
+/* ======================================================= */
+
+.pillars-section {
+    padding: 80px 40px;
+    background-color: #f8f8f8;
+    /* Fondo gris muy claro para separar secciones */
+    text-align: center;
+}
+
+/* Estructura general de la cuadrícula de tarjetas */
+.icon-block-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+    margin-top: 50px;
+}
+
+/* ESTILO DE CADA TARJETA (EFECTO HOVER 3D) */
+.icon-item {
+    flex: 1;
+    max-width: 30%;
+    padding: 30px 20px;
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    cursor: pointer;
+
+    /* Claves para el efecto 3D */
+    transform-style: preserve-3d;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.5, 1), box-shadow 0.4s ease;
+}
+
+/* EFECTO HOVER (Rotación 3D sutil) */
+.icon-item:hover {
+    /* Desplazamiento sutil en X, Y, y Z (hacia adelante) y ligera rotación */
+    transform: translateZ(5px) translateY(-3px) rotateX(1deg) rotateY(1deg);
+    box-shadow: 0 10px 30px rgba(227, 6, 19, 0.2);
+    /* Sombra roja de acento */
+}
+
+/* Estilos de Contenido Interno */
+.icon-primary {
+    font-size: 3.8em;
+    color: #E30613;
+    /* Rojo Corporativo */
+    margin-bottom: 15px;
+}
+
+.icon-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2em;
+    color: #333;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.card-description {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95em;
+    color: #555;
+    line-height: 1.6;
+}
+
+
+
+
+/* Clase que se añade con JavaScript para activar la animación */
+.animated-card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ------------------------------------------------------- */
+/* MEDIA QUERY: MÓVILES */
+/* ------------------------------------------------------- */
+
+@media (max-width: 768px) {
+    .icon-block-grid {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .icon-item {
+        max-width: 100%;
+    }
+}
+
+/* ======================================================= */
+/* SECCION 5: PRODUCTOS */
+/* ======================================================= */
+.solutions-gallery-section {
+    padding: 80px 40px;
+    background-color: white;
+    /* Fondo blanco para contraste */
+}
+
+.solutions-grid {
+    display: flex;
+    align-items: stretch;
+    gap: 30px;
+    margin-top: 50px;
+}
+
+/* ESTILO DE CADA TARJETA DE SOLUCIÓN */
+.solution-card {
+    flex: 1;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    /* Para que la imagen se ajuste al borde redondeado */
+    text-align: left;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.solution-card:hover {
+    transform: translateY(-5px);
+    /* Pequeño efecto de elevación al pasar el mouse */
+}
+
+/* Imagen de la Solución */
+.card-image {
+    width: 100%;
+    height: 200px;
+    /* Altura fija para las imágenes */
+    background-size: cover;
+    background-position: center;
+    border-bottom: 5px solid #E30613;
+    /* Línea de color corporativo */
+}
+
+.card-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;/
+}
+
+.solution-content-block {
+    flex-grow: 1;
+}
+
+.solution-title {
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 1.4em;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Lista de Características */
+.key-features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.key-features li {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9em;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 5px;
+}
+
+.key-features li::before {
+    content: "\f00c";
+    /* Checkmark de Font Awesome */
+    font-family: "FontAwesome";
+    color: #E30613;
+    margin-right: 8px;
+    font-size: 0.8em;
+}
+
+/* (BOTÓN DE WHATSAPP) */
+.cta-passive {
+    display: block;
+    padding: 10px;
+    background-color: #25D366;
+    /* Verde de WhatsApp */
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    border-radius: 6px;
+    margin-top: auto;
+    transition: background-color 0.3s ease;
+}
+
+.cta-passive:hover {
+    background-color: #128C7E;
+}
+
+.cta-passive .fa {
+    margin-right: 5px;
+}
+
+/* CTA GENERAL (Botón grande al final) */
+.cta-general {
+    display: inline-block;
+    padding: 15px 40px;
+    margin-top: 50px;
+    background-color: #E30613;
+    /* Rojo Corporativo */
+    color: white;
+    text-decoration: none;
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 1.1em;
+    letter-spacing: 1px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 10px rgba(227, 6, 19, 0.4);
+}
+
+.cta-general:hover {
+    background-color: #a00411;
+}
+
+/* ------------------------------------------------------- */
+/* MEDIA QUERY: MÓVILES */
+/* ------------------------------------------------------- */
+
+@media (max-width: 768px) {
+    .solutions-grid {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
+
+    .solution-card {
+        max-width: 100%;
+    }
+}
+
+/* ======================================================= */
+/* SECCION 6: POR QUE ELEGIRNOS*/
+/* ======================================================= */
+
+.authority-section {
+    padding: 80px 40px;
+    background-color: #f8f8f8;
+    /* Volvemos al gris claro para contraste */
+}
+
+/* Estructura de la cuadrícula de autoridad */
+.authority-grid {
+    display: flex;
+    justify-content: space-around;
+    gap: 40px;
+    margin-top: 60px;
+}
+
+/* ESTILO DE CADA ITEM (INFOGRAFÍA) */
+
+.authority-item {
+    flex: 1;
+    max-width: 300px;
+    position: relative;
+    padding: 20px;
+    text-align: center;
+}
+
+/* La línea de conexión (Infografía) */
+.authority-grid::after {
+    content: '';
+    position: absolute;
+    top: 150px;
+    /* Ajusta la altura de la línea horizontal */
+    left: 15%;
+    right: 15%;
+    height: 2px;
+    background: #E30613;
+    /* Línea roja */
+    z-index: 1;
+}
+
+/* Círculo que encierra el ícono */
+.icon-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #E30613;
+    /* Círculo rojo */
+    color: white;
+    font-size: 2.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px auto;
+    position: relative;
+    z-index: 5;
+    /* Asegura que el círculo esté por encima de la línea */
+    border: 5px solid #f8f8f8;
+    /* Borde de color de fondo para "romper" la línea */
+}
+
+.authority-title {
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 1.3em;
+    color: #333;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.authority-description {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95em;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* ------------------------------------------------------- */
+/* MEDIA QUERY: MÓVILES */
+/* ------------------------------------------------------- */
+
+@media (max-width: 768px) {
+    .authority-grid {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    /* Eliminamos la línea infográfica en móvil */
+    .authority-grid::after {
+        content: none;
+    }
+}
+
+/* ======================================================= */
+/* SECCION 7: DESCARGAS*/
+/* ======================================================= */
+
+.downloads-section {
+    padding: 80px 40px;
+    background-color: white;
+    /* Fondo blanco para darle claridad y contraste */
+}
+
+/* Contenedor de los botones */
+.downloads-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 50px;
+}
+
+/* ESTILO DE CADA BOTÓN DE DESCARGA */
+.download-button {
+    flex: 0 1 450px;
+    /* Ancho fijo para que no sean demasiado grandes */
+    display: flex;
+    align-items: center;
+    text-align: left;
+    padding: 20px 30px;
+    background-color: #f4f4f4;
+    /* Fondo gris suave para resaltar */
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.download-button:hover {
+    background-color: #eee;
+    border-color: #E30613;
+    /* Resalta con el color corporativo */
+    transform: translateY(-3px);
+}
+
+/* Ícono de PDF Rojo (Punto UX clave) */
+.download-icon {
+    font-size: 3.5em;
+    color: #E30613;
+    /* Rojo Corporativo Fuerte */
+    margin-right: 20px;
+}
+
+.download-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.download-title {
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.download-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9em;
+    color: #555;
+}
+
+/* ------------------------------------------------------- */
+/* MEDIA QUERY: MÓVILES */
+/* ------------------------------------------------------- */
+
+@media (max-width: 768px) {
+    .downloads-grid {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .download-button {
+        flex: 1 1 100%;
+        max-width: 100%;
+        padding: 15px 20px;
+    }
+
+    .download-icon {
+        font-size: 3em;
+    }
+}
+
+/* ======================================================= */
+/* SECCION 8: CIERRE  */
+/* ======================================================= */
+
+.final-cta-section {
+    position: relative;
+    padding: 100px 20px;
+    color: white;
+    text-align: center;
+    background-image: url('../imagenes/banner2-cestari.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;
+    overflow: hidden;
+}
+
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.78);
+    z-index: 1;
+}
+
+.final-cta-content {
+    position: relative;
+    z-index: 5;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Títulos y Texto */
+.cta-title {
+    font-family: 'Fjalla One', sans-serif;
+    font-size: clamp(1.8em, 5vw, 2.8em);
+    color: white;
+    margin-bottom: 10px;
+}
+
+.cta-lead {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(1em, 3vw, 1.2em);
+    color: #ccc;
+    margin-bottom: 30px;
+}
+
+/* Bio de Contacto */
+.person-bio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+    gap: 15px;
+}
+
+.person-photo-small {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #E30613;
+}
+
+.person-contact-name {
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 1.1em;
+    letter-spacing: 1px;
+}
+
+/* CONTENEDOR DE BOTONES (ALINEACIÓN Y CENTRADO) */
+.contact-buttons-simple {
+    display: flex;
+    justify-content: center;
+    /* Centrado horizontal */
+    align-items: center;
+    /* Alineación vertical entre ellos */
+    gap: 20px;
+    margin-bottom: 35px;
+    width: 100%;
+}
+
+.contact-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.05em;
+    transition: all 0.3s ease;
+
+    /* FUERZA UNA SOLA LÍNEA */
+    white-space: nowrap;
+
+    /* AJUSTE DE TAMAÑO */
+    flex: 0 1 auto;
+    /* No crecen de más, se ajustan al contenido */
+    min-width: 250px;
+    box-sizing: border-box;
+}
+
+/* Espaciado del ICONO equilibrado */
+.contact-btn i {
+    margin-right: 10px;
+    font-size: 1.3em;
+}
+
+.whatsapp-btn-simple {
+    background-color: #25D366;
+    color: white;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+.phone-btn-simple {
+    background-color: #E30613;
+    color: white;
+    box-shadow: 0 4px 15px rgba(227, 6, 19, 0.3);
+}
+
+.contact-btn:hover {
+    transform: translateY(-5px);
+    filter: brightness(1.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* CORREO ELECTRÓNICO */
+.contact-email-final {
+    font-family: 'Montserrat', sans-serif;
+    color: #aaa;
+    margin-top: 20px;
+}
+
+.contact-email-final a {
+    color: #aaa;
+    /* Color unificado */
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.contact-email-final a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+/* ------------------------------------------------------- */
+/* MEDIA QUERY: MÓVILES */
+/* ------------------------------------------------------- */
+
+@media (max-width: 768px) {
+    .final-cta-section {
+        padding: 70px 15px;
+        background-attachment: scroll;
+    }
+
+    .contact-buttons-simple {
+        flex-direction: column;
+        /* Se apilan en móvil */
+        gap: 15px;
+    }
+
+    .contact-btn {
+        width: 100%;
+        /* Ancho total en celulares */
+        max-width: 100%;
+        min-width: 0;
+        white-space: normal;
+        /* Permitimos que baje la línea solo en pantallas muy pequeñas */
+    }
+
+    .person-bio {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* ======================================================= */
+/* SECCIÓN 9: FOOTER (PIE DE PÁGINA) */
+/* ======================================================= */
+
+/* Suavizado de scroll */
+
+
+.main-footer {
+    background-color: #1a1a1a;
+    color: #f4f4f4;
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    position: relative;
+    padding-top: 20px;
+}
+
+
+/* BOTÓN SUBIR PEGADO AL MARGEN DERECHO EXTREMO */
+.contenedor-boton-extremo {
+    width: 100%;
+    /* Ocupa toda la pantalla */
+    display: flex;
+    justify-content: flex-end;
+    /* Empuja el botón a la derecha */
+    padding-right: 20px;
+    /* Distancia mínima del borde de la pantalla */
+    box-sizing: border-box;
+    margin-bottom: -20px;
+    /* Ajuste para integrar con el grid */
+}
+
+.circle-up-btn {
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: #f4f4f4;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+.circle-up-btn i {
+    font-size: 30px;
+}
+
+.circle-up-btn:hover {
+    background-color: #E30613;
+    /* Rojo corporativo */
+    border-color: #E30613;
+    color: white;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(227, 6, 19, 0.4);
+}
+
+/* CONTENIDO DEL FOOTER (GRID CENTRADO) */
+.footer-top {
+    padding: 60px 0;
+}
+
+.footer-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.footer-col {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-logo {
+    max-width: 150px;
+    margin-bottom: 15px;
+    filter: brightness(0) invert(1);
+}
+
+.footer-tagline {
+    font-size: 0.9em;
+    color: #aaa;
+    margin-bottom: 20px;
+}
+
+.social-links a {
+    display: inline-block;
+    color: #f4f4f4;
+    font-size: 1.2em;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    border: 1px solid #444;
+    border-radius: 50%;
+    text-align: center;
+    margin-right: 10px;
+    transition: 0.3s;
+}
+
+.social-links a:hover {
+    background-color: #E30613;
+    border-color: #E30613;
+}
+
+.footer-title {
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 1.1em;
+    color: #E30613;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.footer-links-list {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links-list li {
+    margin-bottom: 10px;
+}
+
+.footer-links-list a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: 0.3s;
+}
+
+.footer-links-list a:hover {
+    color: white;
+    padding-left: 5px;
+}
+
+.contact-detail {
+    font-size: 0.9em;
+    color: #ccc;
+    margin-bottom: 15px;
+}
+
+.contact-detail .fa {
+    margin-right: 10px;
+    color: #E30613;
+}
+
+.contact-detail a {
+    color: #ccc;
+    text-decoration: none;
+}
+
+/* BARRA INFERIOR */
+.footer-bottom {
+    background-color: #111;
+    padding: 25px 0;
+    border-top: 1px solid #222;
+}
+
+.footer-legal {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8em;
+    color: #666;
+}
+
+/* ------------------------------------------------------- */
+/* MEDIA QUERY: MÓVILES */
+/* ------------------------------------------------------- */
+
+@media (max-width: 768px) {
+    .footer-grid {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .contenedor-boton-extremo {
+        justify-content: center;
+        padding-right: 0;
+    }
+
+    .footer-legal {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}
