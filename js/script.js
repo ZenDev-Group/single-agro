@@ -101,11 +101,29 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollTrigger: { trigger: ".solutions-grid", start: "top 85%" }
     });
 
+    // ------------------------------------------------------------------
+    // 6. POP-IN NUMEROS (Autoridad)
+    // ------------------------------------------------------------------
+    gsap.from(".pop-in", {
+        scale: 0.5,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "back.out(1.7)",
+        scrollTrigger: {
+            trigger: ".authority-section",
+            start: "top 80%"
+        }
+    });
+
     // --- SECCIÓN 6: AUTORIDAD (Pop dinámico) ---
     gsap.from(".authority-item", {
         scale: 0.7, opacity: 0, y: 40, stagger: 0.2, duration: 1, ease: "back.out(1.7)",
         scrollTrigger: { trigger: ".authority-grid", start: "top 85%" }
     });
+
+
+
 
     // --- SECCIÓN 7: DESCARGAS (Fix Lateral) ---
     gsap.from(".download-button", {

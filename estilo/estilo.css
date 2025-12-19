@@ -930,7 +930,7 @@ html.lenis body {
 /* SECCION 6: POR QUE ELEGIRNOS*/
 /* ======================================================= */
 
-.authority-section {
+.authority-section2 {
     padding: 80px 40px;
     background-color: var(--color-bg-section);
     /* Volvemos al gris claro para contraste */
@@ -1565,4 +1565,29 @@ html.lenis body {
     transform: scale(1.02);
     /* Zoom adicional a la foto interna */
     transition: transform 0.2s ease;
+}
+
+.authority-section {
+    background: var(--color-primary);
+    color: white;
+    padding: 80px 0;
+}
+
+.authority-row {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.big-number {
+    font-family: var(--font-head);
+    font-size: 4rem;
+    display: block;
+}
+
+@media (max-width: 992px) {
+    .authority-row {
+        flex-direction: column;
+        gap: 30px;
+    }
 }
