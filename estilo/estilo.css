@@ -1720,6 +1720,10 @@ html.lenis body {
 /* ======================================================= */
 @media (max-width: 992px) {
 
+    .hero-container {
+        height: 50vh;
+    }
+
     /* En móvil DESACTIVAMOS el comportamiento horizontal */
     .horizontal-scroll-section {
         height: auto;
