@@ -91,15 +91,61 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollTrigger: { trigger: ".pillars-section", start: "top 85%" }
     });
 
-    // --- SECCIÓN 5: PRODUCTOS ---
-    gsap.from(".solutions-grid .solution-card", {
-        y: 80,
-        opacity: 0,
-        duration: 1.2,
-        stagger: 0.2,
-        ease: "power3.out",
-        scrollTrigger: { trigger: ".solutions-grid", start: "top 85%" }
+    // ... (Tu código anterior del Hero, Mapa, etc) ...
+
+    // ---------------------------------------------------------------------------------
+    // 5. ANIMACIONES: SECCIÓN 5 (PRODUCTOS - SCROLL HORIZONTAL INTELIGENTE)
+    // ---------------------------------------------------------------------------------
+
+    // Usamos matchMedia para que solo ocurra en Desktop
+    ScrollTrigger.matchMedia({
+
+        // DESKTOP (Mayor a 992px)
+        "(min-width: 993px)": function () {
+
+            const section = document.querySelector(".horizontal-scroll-section");
+            const wrapper = document.querySelector(".horizontal-wrapper");
+            const content = document.querySelector(".horizontal-content");
+
+            if (section && content) {
+                // 1. Calculamos cuánto se sale el contenido de la pantalla
+                // (Ancho total del contenido - Ancho de la ventana)
+                const scrollAmount = content.scrollWidth - window.innerWidth;
+
+                // 2. Animación de desplazamiento
+                gsap.to(content, {
+                    x: -scrollAmount, // Movemos hacia la izquierda esa cantidad exacta
+                    ease: "none", // Sin aceleración para que se sienta atado al scroll
+                    scrollTrigger: {
+                        trigger: section,
+                        pin: true,     // "Clavamos" la sección en pantalla
+                        scrub: 1,      // Suavizamos el movimiento (1 segundo de lag)
+                        start: "top top", // Empieza cuando el tope de la sección toca el tope de la ventana
+                        end: () => "+=" + scrollAmount, // Dura lo que mide el contenido oculto
+                        invalidateOnRefresh: true, // Recalcula si cambias el tamaño de ventana
+                        // markers: true // Descomenta para ver guías si necesitas depurar
+                    }
+                });
+            }
+        },
+
+        // MOBILE (Menor a 992px)
+        "(max-width: 992px)": function () {
+            // En móvil usamos una animación simple de aparición vertical
+            gsap.from(".horizontal-panel", {
+                y: 50,
+                opacity: 0,
+                stagger: 0.2,
+                duration: 1,
+                scrollTrigger: {
+                    trigger: ".horizontal-content",
+                    start: "top 80%"
+                }
+            });
+        }
     });
+
+    // ... (El resto de tu código para Autoridad, Descargas, Contacto, etc) ...
 
     // ------------------------------------------------------------------
     // 6. POP-IN NUMEROS (Autoridad)
