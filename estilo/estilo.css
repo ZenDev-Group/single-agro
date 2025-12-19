@@ -599,10 +599,11 @@ html.lenis body {
     /* Establece la altura del contenedor del mapa. 
        Esto es importante para que el mapa incrustado tenga un tamaño visible. */
     height: 450px;
-    width: 100%;
+    width: 95%;
     border: 5px solid #E30613;
     /* Borde rojo corporativo alrededor del mapa */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin: 0px auto;
 }
 
 /* ------------------------------------------------------- */
@@ -1013,6 +1014,7 @@ html.lenis body {
     justify-content: center;
     gap: 30px;
     margin-top: 50px;
+    align-items: center;
 }
 
 /* ESTILO DE CADA BOTÓN DE DESCARGA */
@@ -1078,7 +1080,7 @@ html.lenis body {
 
     .download-button {
         flex: 1 1 100%;
-        max-width: 100%;
+        max-width: 80%;
         padding: 15px 20px;
     }
 
