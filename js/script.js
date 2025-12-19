@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         y: 80, // Movimiento notable hacia arriba
         opacity: 0,
         duration: 1.2,
-        stagger: 0.2,
+        stagger: 0.34,
         ease: "power3.out",
         scrollTrigger: { trigger: ".pillars-section", start: "top 85%" }
     });

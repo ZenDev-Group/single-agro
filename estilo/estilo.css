@@ -1,4 +1,37 @@
 /* ======================================================= */
+/* 0. VARIABLES (CONFIGURA TUS COLORES AQUÍ) */
+/* ======================================================= */
+:root {
+    /* Color Principal (Corporativo) */
+    --color-primary: #E30613;
+    /* Color Principal Oscuro (Para efectos hover/pasar el mouse) */
+    --color-primary-dark: #a00411;
+
+    /* WhatsApp */
+    --color-whatsapp: #25d366;
+    --color-whatsapp-hover: #128C7E;
+
+    /* Textos */
+    --color-text-main: #333333;
+    /* Títulos y textos oscuros */
+    --color-text-secondary: #555555;
+    /* Párrafos descriptivos */
+    --color-text-light: #cccccc;
+    /* Textos en fondos oscuros */
+
+    /* Fondos */
+    --color-white: #ffffff;
+    --color-bg-light: #f4f4f4;
+    /* Gris muy claro (Mapas, descargas) */
+    --color-bg-section: #f8f8f8;
+    /* Gris sección alternada (Pilares, Autoridad) */
+    --color-footer-bg: #1a1a1a;
+    /* Fondo oscuro del footer */
+    --color-footer-dark: #111111;
+    /* Fondo barra legal inferior */
+}
+
+/* ======================================================= */
 /* RESET BÁSICO */
 /* ======================================================= */
 * {
@@ -36,9 +69,9 @@ body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
     /* Usamos Montserrat como base */
-    color: #333;
+    color: var(--color-text-main);
     line-height: 1.6;
-    background-color: #ffffff;
+    background-color: var(--color-white);
     /* CLAVE: Empujar todo el contenido hacia abajo para dejar espacio al menú fijo */
     padding-top: 70px;
 }
@@ -176,14 +209,14 @@ html.lenis body {
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     font-size: 0.9em;
-    color: #333;
+    color: var(--color-text-main);
     text-decoration: none;
     text-transform: uppercase;
     transition: all 0.3s ease;
 }
 
 .header-links a:hover {
-    color: #E30613;
+    color: var(--color-primary);
 }
 
 /* ============== BOTÓN LLAMAR AHORA ============== */
@@ -197,7 +230,7 @@ html.lenis body {
 .header-cta-btn {
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
-    background-color: #E30613;
+    background-color: var(--color-primary);
     color: white;
     text-decoration: none;
     padding: 12px 22px;
@@ -208,7 +241,7 @@ html.lenis body {
 }
 
 .header-cta-btn:hover {
-    background-color: #a00411;
+    background-color: var(--color-primary-dark);
     transform: translateY(-2px);
 }
 
@@ -219,7 +252,7 @@ html.lenis body {
     background: none;
     border: none;
     font-size: 1.8em;
-    color: #333;
+    color: var(--color-text-main);
     cursor: pointer;
     padding: 5px;
 }
@@ -414,7 +447,7 @@ html.lenis body {
     height: 60px;
     bottom: 40px;
     right: 40px;
-    background-color: #25d366;
+    background-color: var(--color-whatsapp);
     color: #FFF;
     border-radius: 50px;
     text-align: center;
@@ -456,7 +489,7 @@ html.lenis body {
         background: none;
         border: none;
         font-size: 1.5em;
-        color: #333;
+        color: var(--color-text-main);
         cursor: pointer;
         padding: 0;
     }
@@ -522,7 +555,7 @@ html.lenis body {
 .section-title {
     font-family: 'Fjalla One', sans-serif;
     font-size: 2.5em;
-    color: #333;
+    color: var(--color-text-main);
     margin-bottom: 10px;
     font-weight: 400;
     text-transform: uppercase;
@@ -533,7 +566,7 @@ html.lenis body {
 .section-lead {
     font-family: 'Montserrat', sans-serif;
     font-size: 1.1em;
-    color: #555;
+    color: var(--color-text-secondary);
     margin-bottom: 40px;
     max-width: 700px;
     margin-left: auto;
@@ -544,7 +577,7 @@ html.lenis body {
 .main-story {
     font-size: 1.05em;
     line-height: 1.8;
-    color: #333;
+    color: var(--color-text-main);
     max-width: 750px;
     margin: 0 auto 30px auto;
 }
@@ -553,7 +586,7 @@ html.lenis body {
 .location-highlight {
     font-family: 'Montserrat', sans-serif;
     font-size: 1.2em;
-    color: #333;
+    color: var(--color-text-main);
     margin-bottom: 40px;
     font-weight: 300;
 }
@@ -562,7 +595,7 @@ html.lenis body {
     display: block;
     font-family: 'Fjalla One', sans-serif;
     font-size: 1.5em;
-    color: #E30613;
+    color: var(--color-primary);
     /* Texto Rojo de Acento */
     margin-top: 5px;
     font-weight: 400;
@@ -586,7 +619,7 @@ html.lenis body {
 .map-section {
     padding-top: 50px;
     padding-bottom: 50px;
-    background-color: #f4f4f4;
+    background-color: var(--color-bg-light);
     /* Un gris claro para diferenciarla del blanco de la sección anterior */
 }
 
@@ -600,7 +633,7 @@ html.lenis body {
        Esto es importante para que el mapa incrustado tenga un tamaño visible. */
     height: 450px;
     width: 95%;
-    border: 5px solid #E30613;
+    border: 5px solid var(--color-primary);
     /* Borde rojo corporativo alrededor del mapa */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     margin: 0px auto;
@@ -622,7 +655,7 @@ html.lenis body {
 
 .pillars-section {
     padding: 80px 40px;
-    background-color: #f8f8f8;
+    background-color: var(--color-bg-section);
     /* Fondo gris muy claro para separar secciones */
     text-align: center;
 }
@@ -663,7 +696,7 @@ html.lenis body {
 /* Estilos de Contenido Interno */
 .icon-primary {
     font-size: 3.8em;
-    color: #E30613;
+    color: var(--color-primary);
     /* Rojo Corporativo */
     margin-bottom: 15px;
 }
@@ -671,7 +704,7 @@ html.lenis body {
 .icon-title {
     font-family: 'Montserrat', sans-serif;
     font-size: 1.2em;
-    color: #333;
+    color: var(--color-text-main);
     font-weight: 700;
     text-transform: uppercase;
     margin-bottom: 10px;
@@ -680,7 +713,7 @@ html.lenis body {
 .card-description {
     font-family: 'Montserrat', sans-serif;
     font-size: 0.95em;
-    color: #555;
+    color: var(--color-text-secondary);
     line-height: 1.6;
 }
 
@@ -750,7 +783,7 @@ html.lenis body {
     /* Altura fija para las imágenes */
     background-size: cover;
     background-position: center;
-    border-bottom: 5px solid #E30613;
+    border-bottom: 5px solid var(--color-primary);
     /* Línea de color corporativo */
 }
 
@@ -772,7 +805,7 @@ html.lenis body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #E30613;
+    background-color: var(--color-primary);
     /* Tu rojo corporativo */
     z-index: 2;
     /* Por encima de la imagen */
@@ -804,7 +837,7 @@ html.lenis body {
 .solution-title {
     font-family: 'Fjalla One', sans-serif;
     font-size: 1.4em;
-    color: #333;
+    color: var(--color-text-main);
     margin-bottom: 15px;
 }
 
@@ -818,7 +851,7 @@ html.lenis body {
 .key-features li {
     font-family: 'Montserrat', sans-serif;
     font-size: 0.9em;
-    color: #555;
+    color: var(--color-text-secondary);
     line-height: 1.6;
     margin-bottom: 5px;
 }
@@ -827,7 +860,7 @@ html.lenis body {
     content: "\f00c";
     /* Checkmark de Font Awesome */
     font-family: "FontAwesome";
-    color: #E30613;
+    color: var(--color-primary);
     margin-right: 8px;
     font-size: 0.8em;
 }
@@ -836,7 +869,7 @@ html.lenis body {
 .cta-passive {
     display: block;
     padding: 10px;
-    background-color: #25D366;
+    background-color: var(--color-whatsapp);
     /* Verde de WhatsApp */
     color: white;
     text-align: center;
@@ -849,7 +882,7 @@ html.lenis body {
 }
 
 .cta-passive:hover {
-    background-color: #128C7E;
+    background-color: var(--color-whatsapp-hover);
 }
 
 .cta-passive .fa {
@@ -861,7 +894,7 @@ html.lenis body {
     display: inline-block;
     padding: 15px 40px;
     margin-top: 50px;
-    background-color: #E30613;
+    background-color: var(--color-primary);
     /* Rojo Corporativo */
     color: white;
     text-decoration: none;
@@ -874,7 +907,7 @@ html.lenis body {
 }
 
 .cta-general:hover {
-    background-color: #a00411;
+    background-color: var(--color-primary-dark);
 }
 
 /* ------------------------------------------------------- */
@@ -899,7 +932,7 @@ html.lenis body {
 
 .authority-section {
     padding: 80px 40px;
-    background-color: #f8f8f8;
+    background-color: var(--color-bg-section);
     /* Volvemos al gris claro para contraste */
 }
 
@@ -930,7 +963,7 @@ html.lenis body {
     left: 15%;
     right: 15%;
     height: 2px;
-    background: #E30613;
+    background: var(--color-primary);
     /* Línea roja */
     z-index: 1;
 }
@@ -940,7 +973,7 @@ html.lenis body {
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    background-color: #E30613;
+    background-color: var(--color-primary);
     /* Círculo rojo */
     color: white;
     font-size: 2.5em;
@@ -958,7 +991,7 @@ html.lenis body {
 .authority-title {
     font-family: 'Fjalla One', sans-serif;
     font-size: 1.3em;
-    color: #333;
+    color: var(--color-text-main);
     margin-bottom: 10px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -967,7 +1000,7 @@ html.lenis body {
 .authority-description {
     font-family: 'Montserrat', sans-serif;
     font-size: 0.95em;
-    color: #555;
+    color: var(--color-text-secondary);
     line-height: 1.6;
 }
 
@@ -1025,18 +1058,18 @@ html.lenis body {
     align-items: center;
     text-align: left;
     padding: 20px 30px;
-    background-color: #f4f4f4;
+    background-color: var(--color-bg-light);
     /* Fondo gris suave para resaltar */
     border: 2px solid #ddd;
     border-radius: 10px;
     text-decoration: none;
-    color: #333;
+    color: var(--color-text-main);
     transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
 }
 
 .download-button:hover {
     background-color: #eee;
-    border-color: #E30613;
+    border-color: var(--color-primary);
     /* Resalta con el color corporativo */
     transform: translateY(-3px);
 }
@@ -1044,7 +1077,7 @@ html.lenis body {
 /* Ícono de PDF Rojo (Punto UX clave) */
 .download-icon {
     font-size: 3.5em;
-    color: #E30613;
+    color: var(--color-primary);
     /* Rojo Corporativo Fuerte */
     margin-right: 20px;
 }
@@ -1058,14 +1091,14 @@ html.lenis body {
     font-family: 'Fjalla One', sans-serif;
     font-size: 1.2em;
     font-weight: 700;
-    color: #333;
+    color: var(--color-text-main);
     margin-bottom: 5px;
 }
 
 .download-subtitle {
     font-family: 'Montserrat', sans-serif;
     font-size: 0.9em;
-    color: #555;
+    color: var(--color-text-secondary);
 }
 
 /* ------------------------------------------------------- */
@@ -1108,7 +1141,7 @@ html.lenis body {
     align-items: center;
     justify-content: center;
     min-height: 550px;
-    background-color: #1a1a1a;
+    background-color: var(--color-footer-bg);
     /* Fondo de seguridad */
 }
 
@@ -1159,7 +1192,7 @@ html.lenis body {
 .cta-lead {
     font-family: 'Montserrat', sans-serif;
     font-size: clamp(1em, 3vw, 1.2em);
-    color: #ccc;
+    color: var(--color-text-light);
     margin-bottom: 30px;
 }
 
@@ -1177,7 +1210,7 @@ html.lenis body {
     height: 60px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid #E30613;
+    border: 2px solid var(--color-primary);
 }
 
 .person-contact-name {
@@ -1227,13 +1260,13 @@ html.lenis body {
 }
 
 .whatsapp-btn-simple {
-    background-color: #25D366;
+    background-color: var(--color-whatsapp);
     color: white;
     box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
 }
 
 .phone-btn-simple {
-    background-color: #E30613;
+    background-color: var(--color-primary);
     color: white;
     box-shadow: 0 4px 15px rgba(227, 6, 19, 0.3);
 }
@@ -1302,8 +1335,8 @@ html.lenis body {
 
 
 .main-footer {
-    background-color: #1a1a1a;
-    color: #f4f4f4;
+    background-color: var(--color-footer-bg);
+    color: var(--color-bg-light);
     font-family: 'Montserrat', sans-serif;
     width: 100%;
     position: relative;
@@ -1330,7 +1363,7 @@ html.lenis body {
     height: 40px;
     background-color: transparent;
     border: 2px solid rgba(255, 255, 255, 0.3);
-    color: #f4f4f4;
+    color: var(--color-bg-light);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1345,9 +1378,9 @@ html.lenis body {
 }
 
 .circle-up-btn:hover {
-    background-color: #E30613;
+    background-color: var(--color-primary);
     /* Rojo corporativo */
-    border-color: #E30613;
+    border-color: var(--color-primary);
     color: white;
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(227, 6, 19, 0.4);
@@ -1383,7 +1416,7 @@ html.lenis body {
 
 .social-links a {
     display: inline-block;
-    color: #f4f4f4;
+    color: var(--color-bg-light);
     font-size: 1.2em;
     width: 35px;
     height: 35px;
@@ -1396,14 +1429,14 @@ html.lenis body {
 }
 
 .social-links a:hover {
-    background-color: #E30613;
-    border-color: #E30613;
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
 }
 
 .footer-title {
     font-family: 'Fjalla One', sans-serif;
     font-size: 1.1em;
-    color: #E30613;
+    color: var(--color-primary);
     margin-bottom: 20px;
     text-transform: uppercase;
 }
@@ -1418,7 +1451,7 @@ html.lenis body {
 }
 
 .footer-links-list a {
-    color: #ccc;
+    color: var(--color-text-light);
     text-decoration: none;
     font-size: 0.9em;
     transition: 0.3s;
@@ -1431,23 +1464,23 @@ html.lenis body {
 
 .contact-detail {
     font-size: 0.9em;
-    color: #ccc;
+    color: var(--color-text-light);
     margin-bottom: 15px;
 }
 
 .contact-detail .fa {
     margin-right: 10px;
-    color: #E30613;
+    color: var(--color-primary);
 }
 
 .contact-detail a {
-    color: #ccc;
+    color: var(--color-text-light);
     text-decoration: none;
 }
 
 /* BARRA INFERIOR */
 .footer-bottom {
-    background-color: #111;
+    background-color: var(--color-footer-dark);
     padding: 25px 0;
     border-top: 1px solid #222;
 }
@@ -1479,4 +1512,57 @@ html.lenis body {
         gap: 10px;
         text-align: center;
     }
+}
+
+/* ======================================================= */
+/* EFECTO FOCUS: PILARES Y PRODUCTOS (BLUR INTERACTIVO) */
+/* ======================================================= */
+
+/* 1. ACTIVAR TRANSICIONES SUAVES
+   Forzamos la transición para que el blur no sea instantáneo (golpe seco),
+   superando la restricción de GSAP una vez que el usuario interactúa.
+*/
+.icon-block-grid:hover .icon-item,
+.solutions-grid:hover .solution-card {
+    transition: all 0.2s ease-in-out !important;
+}
+
+/* 2. ESTADO "EMPAÑADO" (CONTEXTO)
+   Cuando pasas el mouse por el CONTENEDOR (la grilla),
+   automáticamente todos los hijos se ponen borrosos,
+   se achican un poco y pierden color.
+*/
+.icon-block-grid:hover .icon-item:not(:hover),
+.solutions-grid:hover .solution-card:not(:hover) {
+    filter: blur(2px);
+    /* Desenfoca y quita color */
+    opacity: 0.5;
+    /* Se vuelve semi-transparente */
+    transform: scale(0.65);
+    /* Se aleja visualmente */
+}
+
+/* 3. ESTADO "RESALTADO" (EL ELEGIDO)
+   El elemento específico que tiene el mouse encima recupera
+   su nitidez, color y crece.
+*/
+.icon-item:hover,
+.solution-card:hover {
+    filter: blur(0);
+    opacity: 1;
+    transform: scale(1.15) translateY(-10px);
+    /* Zoom y elevación */
+    z-index: 10;
+    /* Asegura que quede por encima de los borrosos */
+
+    /* Extra: Un brillo sutil del color corporativo */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+
+}
+
+/* Ajuste específico para la tarjeta de producto para que la imagen destaque más */
+.solution-card:hover .card-image {
+    transform: scale(1.02);
+    /* Zoom adicional a la foto interna */
+    transition: transform 0.2s ease;
 }
