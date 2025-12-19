@@ -1730,6 +1730,7 @@ html.lenis body {
     .horizontal-wrapper {
         height: auto;
         display: block;
+        width: 90%;
     }
 
     .horizontal-content {
