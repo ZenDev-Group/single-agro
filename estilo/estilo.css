@@ -515,7 +515,7 @@ html.lenis body {
 .content-wrapper {
     max-width: 900px;
     margin: 0 auto;
-    width: 80%;
+    /* width: 80%; */
 }
 
 /* Título Secundario */
@@ -884,7 +884,7 @@ html.lenis body {
     .solutions-grid {
         flex-direction: column;
         gap: 20px;
-        align-items: center;
+        align-items: stretch;
     }
 
     .solution-card {
